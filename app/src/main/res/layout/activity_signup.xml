@@ -63,7 +63,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/txtusernamelogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -75,7 +75,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/txtpasswordlogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

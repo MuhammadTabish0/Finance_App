@@ -42,18 +42,19 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/txtusernamelogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/vector_person"
                 android:drawablePadding="8dp"
                 android:hint="Username"
+                android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/txtpasswordlogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
