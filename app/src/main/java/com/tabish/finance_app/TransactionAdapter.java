@@ -11,24 +11,24 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
-public class ExpenseAdapter extends BaseAdapter {
+public class TransactionAdapter extends BaseAdapter {
 
     private Context context;
-    private List<Expense> expenseList;
+    private List<Transaction> TransactionList;
 
-    public ExpenseAdapter(Context context, List<Expense> expenseList) {
+    public TransactionAdapter(Context context, List<Transaction> transactionList) {
         this.context = context;
-        this.expenseList = expenseList;
+        this.TransactionList =transactionList;
     }
 
     @Override
     public int getCount() {
-        return expenseList.size();
+        return TransactionList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return expenseList.get(position);
+        return TransactionList.get(position);
     }
 
     @Override
@@ -52,11 +52,11 @@ public class ExpenseAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Expense expense = expenseList.get(position);
-        holder.listName.setText(expense.getName());
-        holder.listAmount.setText(String.valueOf(expense.getAmount()));
-        holder.listTime.setText(expense.getSdate());
-        holder.listImage.setImageResource(expense.getImage());
+        Transaction transaction = TransactionList.get(position);
+        holder.listName.setText(transaction.getName());
+        holder.listAmount.setText(String.valueOf(transaction.getAmount()));
+        holder.listTime.setText(transaction.getSdate());
+        holder.listImage.setImageResource(transaction.getImage());
         // Additional fields can be set similarly
 
         return convertView;

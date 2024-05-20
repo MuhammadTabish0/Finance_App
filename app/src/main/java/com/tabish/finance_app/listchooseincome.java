@@ -11,27 +11,23 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
-public class listchoose_activity extends AppCompatActivity {
+public class listchooseincome extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_listchooseexpense);
-        //lists,text,buttons
-        ListView choose = findViewById(R.id.choose_expense_list);
+        setContentView(R.layout.activity_listchooseincome);
+        ListView choose = findViewById(R.id.choose_income_list);
         choose.setClickable(true);
-        ExpenseAdapter expenseAdapter;
+        TransactionAdapter incomeAdapter;
         //
-        ArrayList<Expense> expenselist = new ArrayList<>();
-        expenselist.add(new Expense("Food",R.drawable.expense_food));
-        expenselist.add(new Expense("Transport",R.drawable.expense_transport));
-        expenselist.add(new Expense("Medical",R.drawable.expense_medical));
-        expenselist.add(new Expense("Hotel",R.drawable.expense_hotel));
-        expenselist.add(new Expense("Bill",R.drawable.expense_bill));
-        expenseAdapter = new ExpenseAdapter(this,expenselist);
-        choose.setAdapter(expenseAdapter);
-
+        ArrayList<Transaction> incomelist = new ArrayList<>();
+        incomelist.add(new Income("Cash",R.drawable.income_cash));
+        incomelist.add(new Income("Online Transfer", R.drawable.income_online));
+        incomelist.add(new Income("Bank Tranfer",R.drawable.income_bank));
+        incomeAdapter = new TransactionAdapter(this,incomelist);
+        choose.setAdapter(incomeAdapter);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

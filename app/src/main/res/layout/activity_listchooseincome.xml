@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".listchooseexpense">
+    tools:context=".listchooseincome">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose the type of Expense"
+        android:text="Choose the type of Income"
         android:textSize="30sp"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -20,7 +20,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/choose_expense_list"
+        android:id="@+id/choose_income_list"
         android:scrollbars="vertical"
         android:layout_marginTop="12dp"
         tools:listitem="@layout/list_view_choose"

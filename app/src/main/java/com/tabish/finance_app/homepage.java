@@ -3,7 +3,6 @@ package com.tabish.finance_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,14 +26,15 @@ public class homepage extends AppCompatActivity {
         card_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent listincomechoose = new Intent(homepage.this, listchooseincome.class);
+                homepage.this.startActivity(listincomechoose);
             }
         });
         card_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent listchoose = new Intent(homepage.this,com.tabish.finance_app.listchoose_activity.class);
-                homepage.this.startActivity(listchoose);
+                Intent listexpensechoose = new Intent(homepage.this, listchooseexpense.class);
+                homepage.this.startActivity(listexpensechoose);
             }
         });
 

@@ -67,7 +67,7 @@ public class login_activity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
                             Toast.makeText(login_activity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -85,7 +85,7 @@ public class login_activity extends AppCompatActivity {
         });
 
         // Apply WindowInsets to EditText
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.txtusernamelogin), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.linear_login), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
