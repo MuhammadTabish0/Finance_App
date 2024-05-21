@@ -4,10 +4,23 @@ import java.util.Date;
 
 public class Transaction {
     private String name;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private int image;
     private double amount;
     private String sdate;
     private Date date;
+    public Transaction(){
+
+    }
 
     public Transaction(String name, int image) {
         this.name = name;

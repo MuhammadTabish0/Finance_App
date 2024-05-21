@@ -1,11 +1,16 @@
 package com.tabish.finance_app;
 
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+
 public class User {
     private String username;
 
     private String First_name;
     private String Last_Name;
     private String password;
+
     public User(){
 
     };

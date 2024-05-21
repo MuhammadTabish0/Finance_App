@@ -57,6 +57,7 @@ public class TransactionAdapter extends BaseAdapter {
         holder.listAmount.setText(String.valueOf(transaction.getAmount()));
         holder.listTime.setText(transaction.getSdate());
         holder.listImage.setImageResource(transaction.getImage());
+        holder.listNote.setText(transaction.getDescription());
         // Additional fields can be set similarly
 
         return convertView;
