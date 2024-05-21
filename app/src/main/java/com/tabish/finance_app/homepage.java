@@ -33,6 +33,7 @@ public class homepage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_homepage);
         //buttons,views,etc
+        String username = null;
         TextView balance =findViewById(R.id.txtbalance);
         CardView card_income = findViewById(R.id.cardaddincome);
         CardView card_expense = findViewById(R.id.cardaddexpense);
@@ -43,14 +44,32 @@ public class homepage extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
                 // Notify the adapter about the data change
-
+                username = String.valueOf(intent.getStringExtra("username"));
                 balance.setText(String.format("%s", dataamount()));
-                ((TransactionAdapter) history_listview.getAdapter()).notifyDataSetChanged();
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+            reference.child(username).child("transactions").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    historydata.history_list.clear();
+                    for(DataSnapshot mysnapshot: snapshot.getChildren()){
+                        Transaction transaction = mysnapshot.getValue(Transaction.class);
+                        historydata.history_list.add(transaction);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            ((TransactionAdapter) history_listview.getAdapter()).notifyDataSetChanged();
         }
+        String finalUsername = username;
         card_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent listincomechoose = new Intent(homepage.this, listchooseincome.class);
+                listincomechoose.putExtra("username", finalUsername);
                 homepage.this.startActivity(listincomechoose);
             }
         });
@@ -58,6 +77,7 @@ public class homepage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent listexpensechoose = new Intent(homepage.this, listchooseexpense.class);
+                listexpensechoose.putExtra("username", finalUsername);
                 homepage.this.startActivity(listexpensechoose);
             }
         });
@@ -71,11 +91,11 @@ public class homepage extends AppCompatActivity {
     public double dataamount(){
         double amount = 0;
         for(int i = 0;i<historydata.history_list.size();i++){
-            if(historydata.history_list.get(i) instanceof Income){
-                amount+=historydata.history_list.get(i).getAmount();
+            if(historydata.history_list.get(i).isIsexpense()){
+                amount-=historydata.history_list.get(i).getAmount();
             }
             else{
-                amount-=historydata.history_list.get(i).getAmount();
+                amount+=historydata.history_list.get(i).getAmount();
             }
         }
 

@@ -37,11 +37,11 @@ public class listchooseexpense extends AppCompatActivity {
         TransactionAdapter expenseAdapter;
         //
         ArrayList<Transaction> expenselist = new ArrayList<>();
-        expenselist.add(new Expense("Food",R.drawable.expense_food));
-        expenselist.add(new Expense("Transport",R.drawable.expense_transport));
-        expenselist.add(new Expense("Medical",R.drawable.expense_medical));
-        expenselist.add(new Expense("Hotel",R.drawable.expense_hotel));
-        expenselist.add(new Expense("Bill",R.drawable.expense_bill));
+        expenselist.add(new Expense("Food (-)",R.drawable.expense_food));
+        expenselist.add(new Expense("Transport (-)",R.drawable.expense_transport));
+        expenselist.add(new Expense("Medical (-)",R.drawable.expense_medical));
+        expenselist.add(new Expense("Hotel (-)",R.drawable.expense_hotel));
+        expenselist.add(new Expense("Bill (-)",R.drawable.expense_bill));
         expenseAdapter = new TransactionAdapter(this,expenselist);
         choose.setAdapter(expenseAdapter);
         choose.setClickable(true);
@@ -49,6 +49,7 @@ public class listchooseexpense extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Expense selectedExpense = new Expense(expenselist.get(position).getName(),expenselist.get(position).getImage());
+                selectedExpense.setIsexpense(true);
                 showDialog(selectedExpense);
             }
         });
@@ -83,8 +84,12 @@ public class listchooseexpense extends AppCompatActivity {
             }
             expense.setDescription(description);
             historydata.history_list.add(expense);
+            Intent newintent = getIntent();
+            String username = newintent.getStringExtra("username");
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+            reference.child(username).child("transactions").setValue(historydata.history_list);
             Intent intent = new Intent(listchooseexpense.this, homepage.class);
-
+            intent.putExtra("username",username);
             listchooseexpense.this.startActivity(intent);
         });
 

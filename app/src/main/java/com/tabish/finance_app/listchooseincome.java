@@ -16,6 +16,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class listchooseincome extends AppCompatActivity {
@@ -31,9 +34,9 @@ public class listchooseincome extends AppCompatActivity {
 
         //
         ArrayList<Transaction> incomelist = new ArrayList<>();
-        incomelist.add(new Income("Cash",R.drawable.income_cash));
-        incomelist.add(new Income("Online Transfer", R.drawable.income_online));
-        incomelist.add(new Income("Bank Tranfer",R.drawable.income_bank));
+        incomelist.add(new Income("Cash (+)",R.drawable.income_cash));
+        incomelist.add(new Income("Online Transfer (+)", R.drawable.income_online));
+        incomelist.add(new Income("Bank Tranfer (+)",R.drawable.income_bank));
         incomeAdapter = new TransactionAdapter(this,incomelist);
         choose.setAdapter(incomeAdapter);
         choose.setClickable(true);
@@ -41,6 +44,7 @@ public class listchooseincome extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Income selectedincome = new Income(incomelist.get(position).getName(),incomelist.get(position).getImage());
+                selectedincome.setIsexpense(false);
                 showDialog(selectedincome);
             }
         });
@@ -74,7 +78,14 @@ public class listchooseincome extends AppCompatActivity {
             }
             expense.setDescription(description);
             historydata.history_list.add(expense);
+            Intent newintent = getIntent();
+            String username = newintent.getStringExtra("username");
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+            if (username != null) {
+                reference.child(username).child("transactions").setValue(historydata.history_list);
+            }
             Intent intent = new Intent(listchooseincome.this, homepage.class);
+            intent.putExtra("username",username);
 
             listchooseincome.this.startActivity(intent);
         });

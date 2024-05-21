@@ -56,8 +56,9 @@ public class login_activity extends AppCompatActivity {
                             if (dataSnapshot.exists()) {
                                 User user = dataSnapshot.getValue(User.class);
                                 if (user != null && user.getPassword().equals(m_password)) {
-                                    Intent intent = new Intent(login_activity.this, com.tabish.finance_app.homepage.class);
-                                    login_activity.this.startActivity(intent);
+                                    Intent homepage = new Intent(login_activity.this, com.tabish.finance_app.homepage.class);
+                                    homepage.putExtra("username", m_username); // Pass the username
+                                    login_activity.this.startActivity(homepage);
                                 } else {
                                     Toast.makeText(login_activity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                                 }

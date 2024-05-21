@@ -68,6 +68,7 @@ public class signup_activity extends AppCompatActivity {
                                 User user = new User(m_username, m_firstname, m_lastname, m_password);
                                 reference.child(m_username).setValue(user);
                                 Intent homepage = new Intent(signup_activity.this, com.tabish.finance_app.homepage.class);
+                                homepage.putExtra("username",m_username);
                                 signup_activity.this.startActivity(homepage);
                             }
                         }

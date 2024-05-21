@@ -6,6 +6,16 @@ public class Transaction {
     private String name;
     private String description;
 
+    public boolean isIsexpense() {
+        return isexpense;
+    }
+
+    public void setIsexpense(boolean isexpense) {
+        this.isexpense = isexpense;
+    }
+
+    private boolean isexpense;
+
     public String getDescription() {
         return description;
     }
